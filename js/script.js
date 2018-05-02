@@ -24,7 +24,6 @@ function loadData() {
 	}
 	else if ( streetStr ) { address = streetStr; }
 	else if ( cityStr ) { address = cityStr; }
-	console.log(address);
 	if ( address.length > 0 ) {
 		$greeting.text("These are the info related to " + address + ".");
 		$body.append('<img class = "bgimg" src="' + googleStreetViewURL + address + '">');
@@ -58,6 +57,7 @@ function loadData() {
 	var wikiRequestTimeOut = setTimeout(function(){
 		$wikiElem.text("Failed to get wikipedia resources.");
 	}, 10000);
+	
 	$.ajax({
 		url: wikiUrl,
 		dataType: "jsonp",
