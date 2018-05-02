@@ -40,15 +40,14 @@ function loadData() {
 		});
 	
 	$.getJSON(url, function(result){
+		$nytHeaderElem.text("New York Times Articles about " + cityStr);
 		var docs = result.response.docs;
-		console.log(docs);
-		var nytArticles = '<ul id="nytimes-articles" class="articles-list">';
+		var nytArticles = '';
  		for( var i = 0; i < docs.length; i++ ){
 			if ( docs[i].document_type != "topic" ){
-				nytArticles += `<li class="article"><a href="${docs[i].web_url}">${docs[i].headline.main}</a><p>"${docs[i].snippet}"</p></li>`;
+				nytArticles += `<li class="article"><a href="${docs[i].web_url}">${docs[i].headline.main}</a><p>${docs[i].snippet}</p></li>`;
 			}
-		} 
-		nytArticles += '</ul>';
+		}
 		$nytElem.append(nytArticles);
 	});
 	
