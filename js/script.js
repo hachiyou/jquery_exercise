@@ -33,22 +33,24 @@ function loadData() {
 		$greeting.text("No address found. Please enter a new address.")
 	}
 	
-	var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-	url += '?' + $.param({
+	var nytUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+	nytUrl += '?' + $.param({
 		'api-key': nytApiKey,
 		'q': address
 		});
 	
-	$.getJSON(url, function(result){
+	$.getJSON(nytUrl, function(result){
 		$nytHeaderElem.text("New York Times Articles about " + cityStr);
 		var docs = result.response.docs;
 		var nytArticles = '';
  		for( var i = 0; i < docs.length; i++ ){
-			if ( docs[i].document_type != "topic" ){
+			if ( docs[i].document_type === "article" ){
 				nytArticles += `<li class="article"><a href="${docs[i].web_url}">${docs[i].headline.main}</a><p>${docs[i].snippet}</p></li>`;
 			}
 		}
 		$nytElem.append(nytArticles);
+	}).error(function(e){
+		$nytHeaderElem.text("New York Times Articles Cannot be Loaded!");
 	});
 	
 	return false;
