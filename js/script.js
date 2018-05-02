@@ -57,7 +57,7 @@ function loadData() {
 	
 	var wikiRequestTimeOut = setTimeout(function(){
 		$wikiElem.text("Failed to get wikipedia resources.");
-	}, 10000{;
+	}, 10000);
 	$.ajax({
 		url: wikiUrl,
 		dataType: "jsonp",
